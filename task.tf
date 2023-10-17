@@ -68,3 +68,11 @@ resource "aws_instance" "instance2" {
   }
 }
 
+In this script:
+
+The AWS provider is configured with your desired region.
+A VPC is created with a specified CIDR block.
+Three subnets are created in different availability zones within the VPC.
+A security group is created to allow inbound traffic for SSH and HTTP.
+Two EC2 instances are launched in two different subnets using the specified security group and SSH key pair.
+
