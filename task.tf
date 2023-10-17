@@ -1,6 +1,6 @@
 # Define the AWS provider
 provider "aws" {
-  region = "us-east-1" # Replace with your desired AWS region
+  region = "ap-south-1" # Replace with your desired AWS region
 }
 
 # Create a VPC
@@ -18,7 +18,7 @@ resource "aws_subnet" "subnet1" {
   count = 3
   vpc_id = aws_vpc.my_vpc.id
   cidr_block = element(["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"], count.index)
-  availability_zone = element(["us-east-1a", "us-east-1b", "us-east-1c"], count.index)
+  availability_zone = element(["ap-south-1a", "ap-south-1b", "ap-south-1c"], count.index)
   map_public_ip_on_launch = true
   tags = {
     Name = "subnet-${count.index + 1}"
@@ -47,22 +47,22 @@ resource "aws_security_group" "my_security_group" {
 
 # Launch two EC2 instances in different subnets
 resource "aws_instance" "instance1" {
-  ami           = "ami-0c55b159cbfafe1f0" # Replace with your desired AMI ID
+  ami           = "ami-0f5ee92e2d63afc18" # Replace with your desired AMI ID
   instance_type = "t2.micro"             # Replace with your desired instance type
   subnet_id     = aws_subnet.subnet1[0].id
   security_groups = [aws_security_group.my_security_group.id]
-  key_name      = "my-key-pair"           # Replace with your SSH key name
+  key_name      = "gitguvi"           # Replace with your SSH key name
   tags = {
     Name = "web-server-1"
   }
 }
 
 resource "aws_instance" "instance2" {
-  ami           = "ami-0c55b159cbfafe1f0" # Replace with your desired AMI ID
+  ami           = "ami-0f5ee92e2d63afc18" # Replace with your desired AMI ID
   instance_type = "t2.micro"             # Replace with your desired instance type
   subnet_id     = aws_subnet.subnet1[1].id
   security_groups = [aws_security_group.my_security_group.id]
-  key_name      = "my-key-pair"           # Replace with your SSH key name
+  key_name      = "gitguvi"           # Replace with your SSH key name
   tags = {
     Name = "web-server-2"
   }
